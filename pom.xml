@@ -1,0 +1,133 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <groupId>com.kdgcsoft</groupId>
+    <artifactId>nova</artifactId>
+    <packaging>pom</packaging>
+    <version>1.0-SNAPSHOT</version>
+    <modules>
+        <module>nova-common</module>
+        <module>nova-web</module>
+        <module>nova-document</module>
+        <module>example</module>
+    </modules>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <java.version>1.8</java.version>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+        <!--springboot 基础版本-->
+        <spring-boot.version>2.7.2</spring-boot.version>
+        <!--Hutool是一个小而全的Java工具类库 https://www.hutool.cn/docs -->
+        <hutool.version>5.8.4</hutool.version>
+        <!--FASTJSON v2是FASTJSON项目的重要升级，目标是为下一个十年提供一个高性能的JSON https://alibaba.github.io/fastjson2/-->
+        <fastjson2.version>2.0.12</fastjson2.version>
+        <!--mybatis-plus-boot-starter-->
+        <mybatis-plus-boot.version>3.5.2</mybatis-plus-boot.version>
+        <!--druid是一款国产开源Java数据库连接池 springboot-starter版本-->
+        <druid-stater.version>1.2.12</druid-stater.version>
+        <!--jwt解析器-->
+        <jwt.version>0.9.1</jwt.version>
+        <!-- 解析客户端操作系统、浏览器等-->
+        <bitwalker.version>1.21</bitwalker.version>
+        <!--高性能队列——Disruptor https://tech.meituan.com/2016/11/18/disruptor.html-->
+        <disruptor.version>3.4.4</disruptor.version>
+        <!--Knife4j是一个集Swagger2 和 OpenAPI3为一体的增强解决方案-->
+        <knife4j.version>2.0.9</knife4j.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>cn.hutool</groupId>
+            <artifactId>hutool-all</artifactId>
+            <version>${hutool.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2</artifactId>
+            <version>${fastjson2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.alibaba.fastjson2</groupId>
+            <artifactId>fastjson2-extension</artifactId>
+            <version>${fastjson2.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+            <version>1.18.24</version>
+        </dependency>
+    </dependencies>
+    <dependencyManagement>
+        <dependencies>
+            <!-- SpringBoot的依赖配置-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.baomidou</groupId>
+                <artifactId>mybatis-plus-boot-starter</artifactId>
+                <version>${mybatis-plus-boot.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba</groupId>
+                <artifactId>druid-spring-boot-starter</artifactId>
+                <version>${druid-stater.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.github.xiaoymin</groupId>
+                <!--使用Swagger2-->
+                <artifactId>knife4j-spring-boot-starter</artifactId>
+                <version>${knife4j.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>cn.hutool</groupId>
+                <artifactId>hutool-all</artifactId>
+                <version>${hutool.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.alibaba.fastjson2</groupId>
+                <artifactId>fastjson2</artifactId>
+                <version>${fastjson2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.lmax</groupId>
+                <artifactId>disruptor</artifactId>
+                <version>${disruptor.version}</version>
+            </dependency>
+            <!-- Token生成与解析-->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt</artifactId>
+                <version>${jwt.version}</version>
+            </dependency>
+            <!-- 解析客户端操作系统、浏览器等 -->
+            <dependency>
+                <groupId>eu.bitwalker</groupId>
+                <artifactId>UserAgentUtils</artifactId>
+                <version>${bitwalker.version}</version>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <distributionManagement>
+        <repository>
+            <id>kdgcsoft-releases</id>
+            <url>http://power.kdgcsoft.com:8181/nexus/content/repositories/releases</url>
+        </repository>
+        <snapshotRepository>
+            <id>kdgcsoft-snapshots</id>
+            <url>http://power.kdgcsoft.com:8181/nexus/content/repositories/snapshots</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+</project>

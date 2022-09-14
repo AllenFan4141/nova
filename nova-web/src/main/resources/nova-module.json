@@ -1,0 +1,133 @@
+{
+  "name": "nova-web模块",
+  "code": "nova-web",
+  "description": "nova的Web基础框架,包含了基础配置,模块加载与管理,基础功能API接口等内容",
+  "order": 0,
+  "params": [
+    {
+      "code": "APP_NAME",
+      "name": "应用系统名称",
+      "type": "STRING",
+      "defaultValue": "Nova",
+      "description": "应用系统的名称,用于显示在浏览器标题等处"
+    },{
+      "code": "FAV_ICO",
+      "name": "应用系统图标",
+      "type": "IMAGE",
+      "defaultValue": "static/favicon.ico",
+      "description": "浏览器标签页上显示的图标"
+    },{
+      "code": "LOGIN_BG",
+      "name": "登录页背景图",
+      "type": "IMAGE",
+      "defaultValue": "static/css/login/image/background.svg",
+      "description": "登录页的整体背景图"
+    },
+    {
+      "code": "LOGIN_HEADER_BG",
+      "name": "登录页顶部背景图片",
+      "type": "IMAGE",
+      "defaultValue": "static/favicon-64.png",
+      "description": "登录页顶部背景图片"
+    },{
+      "code": "LOGIN_COPYRIGHT",
+      "name": "版权信息",
+      "type": "STRING",
+      "defaultValue": "©2020, GUOCHUANG SOFTWARE ALL RIGHTS RESERVED.科大国创软件股份有限公司版权提供技术支持",
+      "description": "显示在登录页底部的版权信息,如果不设置则不会显示版权信息"
+    },
+    {
+      "code": "LOGIN_COPYRIGHT_COLOR",
+      "name": "版权文字颜色",
+      "type": "STRING",
+      "defaultValue": "black",
+      "description": "版权信息显示的文字颜色"
+    },{
+      "code": "PASSWORD_TYPE",
+      "name": "用户密码类型",
+      "type": "SELECT",
+      "options": [
+        {
+          "text": "随机密码",
+          "value": "RANDOM"
+        },
+        {
+          "text": "默认密码",
+          "value": "DEFAULT"
+        }
+      ],
+      "defaultValue": "DEFAULT",
+      "description": "新创建用户及重置密码时的密码生成方式,随机密码的组合为八位(字母+数字)"
+    },
+    {
+      "code": "DEFAULT_PASSWORD",
+      "name": "用户默认密码",
+      "type": "STRING",
+      "defaultValue": "123456",
+      "description": "新创建用户时的默认密码"
+    },
+    {
+      "code": "FORCE_CHANGE_PASSWORD",
+      "name": "强制修改密码",
+      "type": "SELECT",
+      "options": [
+        {
+          "text": "否",
+          "value": "false"
+        },
+        {
+          "text": "是",
+          "value": "true"
+        }
+      ],
+      "defaultValue": "false",
+      "description": "是否强制用户登录的时候修改初始密码"
+    },
+    {
+      "code": "PASSWORD_VALIDATOR",
+      "name": "密码校验规则",
+      "type": "SELECT",
+      "options": [
+        {
+          "text": "无",
+          "value": ""
+        },
+        {
+          "text": "8位以上的字母,数字组合",
+          "value": "passwordA"
+        },
+        {
+          "text": "8位以上的字母,数字,特殊字符组合",
+          "value": "passwordB"
+        },
+        {
+          "text": "8位以上的大小写字母,数字,特殊字符组合",
+          "value": "passwordC"
+        }
+      ],
+      "defaultValue": "passwordB",
+      "description": "用户更改密码时的验证规则"
+    },
+    {
+      "code": "LOGIN_TRY_COUNT",
+      "name": "登录尝试次数",
+      "type": "NUMBER",
+      "defaultValue": "-1",
+      "description": "用户登录失败的最大尝试次数,超过该数值将锁定用户,设置为-1则不启动该策略"
+    },
+    {
+      "code": "ACCOUNT_EXPIRE_MONTH",
+      "name": "用户有效时长(月)",
+      "type": "NUMBER",
+      "defaultValue": "-1",
+      "description": "设置用户的有效时长,单位(月),超过该时长用户没有登录过,则会将用户状态调整为待激活,设置为-1或0 则不启动该策略"
+    },
+    {
+      "code": "PASSWORD_EXPIRE_MONTH",
+      "name": "密码有效时长(月)",
+      "type": "NUMBER",
+      "defaultValue": "-1",
+      "description": "设置密码的有效时长,单位(月),超过该时长用户没有修改过密码,则会强制用户修改密码,设置为-1或0 则不启动该策略,注意,该策略需要配合[强制修改密码]选项一起使用"
+    }
+  ]
+}

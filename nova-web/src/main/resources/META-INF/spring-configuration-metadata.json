@@ -1,0 +1,158 @@
+{
+  "properties": [
+    {
+      "name": "nova.name",
+      "type": "java.lang.String",
+      "description": "项目名称",
+      "defaultValue": "nova",
+      "sourceType": "com.kdgcsoft.web.config.NovaProperties"
+    },
+    {
+      "name": "nova.description",
+      "type": "java.lang.String",
+      "description": "项目的一些描述信息",
+      "defaultValue": "",
+      "sourceType": "com.kdgcsoft.web.config.NovaProperties"
+    },
+    {
+      "name": "nova.font-backend",
+      "type": "java.lang.Boolean",
+      "description": "是否前后端分离项目",
+      "sourceType": "com.kdgcsoft.web.config.NovaProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "nova.debug",
+      "type": "java.lang.Boolean",
+      "description": "是否调试模式,调试模式下会有sql打印等其他的相关信息",
+      "sourceType": "com.kdgcsoft.web.config.NovaProperties",
+      "defaultValue": false
+    },
+    {
+      "name": "nova.root.enabled",
+      "type": "java.lang.Boolean",
+      "description": "是否开启root用户",
+      "sourceType": "com.kdgcsoft.web.config.NovaProperties",
+      "defaultValue": true
+    },
+    {
+      "name": "nova.root.name",
+      "type": "java.lang.String",
+      "description": "root用户的用户名",
+      "sourceType": "com.kdgcsoft.web.config.NovaProperties",
+      "defaultValue": "root"
+    },
+    {
+      "name": "nova.root.password",
+      "type": "java.lang.String",
+      "description": "root用户的密码",
+      "sourceType": "com.kdgcsoft.web.config.NovaProperties",
+      "defaultValue": "root"
+    },
+    {
+      "name": "nova.loginUrl",
+      "type": "java.lang.String",
+      "description": "登录请求发送的地址",
+      "sourceType": "com.kdgcsoft.web.config.NovaProperties",
+      "defaultValue": "/auth/login"
+    },
+    {
+      "name": "nova.logoutUrl",
+      "type": "java.lang.String",
+      "description": "退出登录请求发送的地址",
+      "sourceType": "com.kdgcsoft.web.config.NovaProperties",
+      "defaultValue": "/auth/logout"
+    },
+    {
+      "name": "nova.loginPageUrl",
+      "type": "java.lang.String",
+      "description": "非前后端分离项目中,登录页面的地址",
+      "sourceType": "com.kdgcsoft.web.config.NovaProperties",
+      "defaultValue": "/login"
+    },
+    {
+      "name": "nova.jwt.cacheType",
+      "type": "java.lang.String",
+      "description": "jwt缓存的类型",
+      "sourceType": "com.kdgcsoft.web.config.NovaProperties",
+      "defaultValue": "local"
+    },
+    {
+      "name": "nova.jwt.header",
+      "type": "java.lang.String",
+      "description": "jwt从请求头中获取token的key",
+      "sourceType": "com.kdgcsoft.web.config.NovaProperties",
+      "defaultValue": "Authorization"
+    },
+    {
+      "name": "nova.jwt.token.prefix",
+      "type": "java.lang.String",
+      "description": "jwt生成token的前缀",
+      "sourceType": "com.kdgcsoft.web.config.NovaProperties",
+      "defaultValue": "Bearer "
+    },
+    {
+      "name": "nova.jwt.secret",
+      "type": "java.lang.String",
+      "description": "jwt密钥",
+      "sourceType": "com.kdgcsoft.web.config.NovaProperties",
+      "defaultValue": "nova2021"
+    },
+    {
+      "name": "nova.sql.print",
+      "type": "java.lang.Boolean",
+      "description": "是否打印SQL在控制台",
+      "sourceType": "com.kdgcsoft.web.config.NovaProperties",
+      "defaultValue": "false"
+    },
+    {
+      "name": "nova.sql.logSql",
+      "type": "java.lang.Boolean",
+      "description": "是否在日志文件中记录sql执行记录",
+      "sourceType": "com.kdgcsoft.web.config.NovaProperties",
+      "defaultValue": "true"
+    },
+    {
+      "name": "nova.sql.logOnlySlowSql",
+      "type": "java.lang.Boolean",
+      "description": "是否只在日志文件中记录慢sql",
+      "sourceType": "com.kdgcsoft.web.config.NovaProperties",
+      "defaultValue": "true"
+    },
+    {
+      "name": "nova.sql.slowSqlMillis",
+      "type": "java.lang.Long",
+      "description": "慢sql的最大毫秒数",
+      "sourceType": "com.kdgcsoft.web.config.NovaProperties",
+      "defaultValue": "1000"
+    }
+  ],
+  "hints": [
+    {
+      "name": "nova.font-backend",
+      "values": [
+        {
+          "value": true,
+          "description": "开启后会使用jwt进行权限,前端项目需要单独启动"
+        },
+        {
+          "value": false,
+          "description": "使用session管理会话,前后端页面在同一个工程包中"
+        }
+      ]
+    },
+    {
+      "name": "nova.jwt.cacheType",
+      "values": [
+        {
+          "value": "local",
+          "description": "使用本地缓存"
+        },
+        {
+          "value": "redis",
+          "description": "使用redis缓存jwt,开启此配置需要引入redis"
+        }
+      ]
+    }
+  ]
+}

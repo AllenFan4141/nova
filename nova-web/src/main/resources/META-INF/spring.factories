@@ -1,0 +1,2 @@
+org.springframework.boot.autoconfigure.EnableAutoConfiguration=\
+com.kdgcsoft.web.config.NovaAutoConfiguration
