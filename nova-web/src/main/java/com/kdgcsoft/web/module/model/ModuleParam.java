@@ -5,6 +5,7 @@ import cn.hutool.core.lang.Pair;
 import cn.hutool.core.util.StrUtil;
 import com.kdgcsoft.web.base.entity.BaseParam;
 import com.kdgcsoft.web.base.enums.ParamType;
+import com.kdgcsoft.web.base.enums.YesNo;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -26,6 +27,11 @@ public class ModuleParam implements Serializable {
     private ParamType type;
     private String description;
     private String defaultValue;
+    /**
+     * 是否允许匿名访问
+     */
+    private boolean anonAccess = false;
+
     private List<Pair> options = new ArrayList<>();
 
     /**
@@ -39,6 +45,7 @@ public class ModuleParam implements Serializable {
                 && this.name.equals(db.getName())
                 && this.type.equals(db.getParamType())
                 && this.description.equals(db.getDescription())
+                && db.getAnonAccess().equals(YesNo.ofBoolean(this.anonAccess))
                 && this.defaultValue.equals(db.getDefaultValue());
     }
 

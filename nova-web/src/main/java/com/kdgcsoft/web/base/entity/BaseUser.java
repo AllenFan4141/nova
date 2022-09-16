@@ -4,9 +4,9 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.kdgcsoft.web.base.enums.Enabled;
 import com.kdgcsoft.web.base.enums.Gender;
 import com.kdgcsoft.web.base.enums.UserStatus;
+import com.kdgcsoft.web.base.enums.YesNo;
 import com.kdgcsoft.web.common.enums.UserType;
 import com.kdgcsoft.web.common.model.LoginUser;
 import lombok.Data;
@@ -92,7 +92,7 @@ public class BaseUser extends BaseEntity implements Serializable {
     /**
      * 是否启用
      */
-    private Enabled enabled;
+    private YesNo enabled;
 
     /**
      * 用户状态
@@ -123,7 +123,7 @@ public class BaseUser extends BaseEntity implements Serializable {
         loginUser.setFullName(this.userName);
         loginUser.setAvatar(this.userAvatar);
         loginUser.setUserType(UserType.NORMAL);
-        loginUser.setEnabled(this.enabled == Enabled.Y);
+        loginUser.setEnabled(this.enabled == YesNo.Y);
         switch (this.userStatus) {
             case LOCK:
                 //用户锁定

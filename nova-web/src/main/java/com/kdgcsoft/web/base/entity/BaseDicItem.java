@@ -1,10 +1,11 @@
 package com.kdgcsoft.web.base.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.kdgcsoft.common.interfaces.ITreeNode;
-import com.kdgcsoft.web.base.enums.Embed;
+import com.kdgcsoft.web.base.enums.YesNo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -35,7 +36,7 @@ public class BaseDicItem extends BaseEntity implements ITreeNode<BaseDicItem>, S
     private Long pid;
 
     @ApiModelProperty(value = "是否内置", notes = "内置的字典项由程序自动加载,不可删除")
-    private Embed embed;
+    private YesNo embed;
 
     @ApiModelProperty("值")
     private String value;
@@ -58,16 +59,9 @@ public class BaseDicItem extends BaseEntity implements ITreeNode<BaseDicItem>, S
         return this.pid;
     }
 
-    private transient List<BaseDicItem> children;
+    @TableField(exist = false)
+    private List<BaseDicItem> children;
 
-    @Override
-    public void addChild(BaseDicItem node) {
-        if (this.children == null) {
-            children = new ArrayList<>();
-        }
-        this.children.add(node);
-
-    }
 
     public String getText() {
         return this.text;

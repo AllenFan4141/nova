@@ -9,6 +9,7 @@ create table if not exists base_param
     default_value varchar,
     param_type    varchar,
     embed         varchar,
+    anon_access   varchar,
     description   varchar,
     deleted       smallint,
     create_by     bigint,
@@ -30,6 +31,8 @@ comment on column base_param.default_value is '默认值';
 comment on column base_param.param_type is '参数类型';
 
 comment on column base_param.embed is '是否内置参数';
+
+comment on column base_param.anon_access is '是否可以匿名访问';
 
 comment on column base_param.description is '描述';
 
@@ -253,6 +256,172 @@ comment on column base_user.modify_by is '最后修改人';
 comment on column base_user.create_time is '创建时间';
 
 comment on column base_user.modify_time is '最后修改时间';
+
+create table if not exists base_org
+(
+    org_id        bigserial
+        primary key,
+    org_pid       bigint,
+    org_name      varchar,
+    org_code      varchar,
+    org_full_name varchar,
+    enabled       varchar,
+    order_no      varchar,
+    deleted        integer,
+    create_by     bigint,
+    modify_by     bigint,
+    create_time   timestamp,
+    modify_time   timestamp
+);
+
+comment on table base_org is '组织机构';
+
+comment on column base_org.org_id is '主键';
+
+comment on column base_org.org_pid is '上级组织ID';
+
+comment on column base_org.org_name is '组织机构名称';
+
+comment on column base_org.org_code is '组织机构编码';
+
+comment on column base_org.org_full_name is '组织机构全称';
+
+comment on column base_org.enabled is '启用';
+
+comment on column base_org.order_no is '顺序号';
+
+comment on column base_org.deleted is '逻辑删除';
+
+comment on column base_org.create_by is '创建人';
+
+comment on column base_org.modify_by is '最后修改人';
+
+comment on column base_org.create_time is '创建时间';
+
+comment on column base_org.modify_time is '最后修改时间';
+
+create table if not exists base_dept
+(
+    dept_id        bigserial
+        primary key ,
+    dept_pid       bigint,
+    org_id         bigint,
+    dept_name      varchar,
+    dept_code      varchar,
+    dept_full_name varchar,
+    enabled        varchar,
+    order_no       varchar,
+    deleted         integer,
+    create_by      bigint,
+    modify_by      bigint,
+    create_time    timestamp(6),
+    modify_time    timestamp(6)
+
+);
+
+comment on table base_dept is '组织机构';
+
+comment on column base_dept.dept_id is '主键';
+
+comment on column base_dept.dept_pid is '上级部门ID';
+
+comment on column base_dept.org_id is '组织机构ID';
+
+comment on column base_dept.dept_name is '部门名称';
+
+comment on column base_dept.dept_code is '部门编码';
+
+comment on column base_dept.dept_full_name is '部门全称';
+
+comment on column base_dept.enabled is '启用';
+
+comment on column base_dept.order_no is '顺序号';
+
+comment on column base_dept.deleted is '逻辑删除';
+
+comment on column base_dept.create_by is '创建人';
+
+comment on column base_dept.modify_by is '最后修改人';
+
+comment on column base_dept.create_time is '创建时间';
+
+comment on column base_dept.modify_time is '最后修改时间';
+
+
+
+create table if not exists base_opt_log
+(
+    log_id          bigserial
+            primary key,
+    log_title       varchar,
+    log_url         varchar,
+    http_method     varchar,
+    java_method     integer,
+    opt_type        varchar,
+    opt_time        timestamp,
+    opt_ip          varchar,
+    time_cost       bigint,
+    success         varchar,
+    response        varchar,
+    request         varchar,
+    opt_description varchar,
+    operator_id     bigint,
+    operator_name   varchar,
+    deleted         integer,
+    create_by       bigint,
+    modify_by       bigint,
+    create_time     timestamp,
+    modify_time     timestamp
+
+);
+
+
+
+comment on table base_opt_log is '操作日志';
+
+comment on column base_opt_log.log_id is '主键';
+
+comment on column base_opt_log.log_title is '操作标题';
+
+comment on column base_opt_log.log_url is '日志请求地址';
+
+comment on column base_opt_log.http_method is '请求方式';
+
+comment on column base_opt_log.java_method is 'java方法调用';
+
+comment on column base_opt_log.opt_type is '操作类型';
+
+comment on column base_opt_log.opt_time is '操作时间';
+
+comment on column base_opt_log.opt_ip is '操作的IP地址';
+
+comment on column base_opt_log.time_cost is '操作耗时';
+
+comment on column base_opt_log.success is '响应是否成功';
+
+comment on column base_opt_log.response is '响应结果';
+
+comment on column base_opt_log.request is '请求内容';
+
+comment on column base_opt_log.opt_description is '操作的文字描述,使用SpEL表达式解析后的文字内容';
+
+comment on column base_opt_log.operator_id is '操作人ID';
+
+comment on column base_opt_log.operator_name is '操作人姓名';
+
+comment on column base_opt_log.deleted is '逻辑删除';
+
+comment on column base_opt_log.create_by is '创建人';
+
+comment on column base_opt_log.modify_by is '最后修改人';
+
+comment on column base_opt_log.create_time is '创建时间';
+
+comment on column base_opt_log.modify_time is '修改时间';
+
+
+
+
 
 
 

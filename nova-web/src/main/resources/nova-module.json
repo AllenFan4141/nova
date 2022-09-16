@@ -1,6 +1,6 @@
 {
   "name": "nova-web模块",
-  "code": "nova-web",
+  "code": "NOVA-WEB",
   "description": "nova的Web基础框架,包含了基础配置,模块加载与管理,基础功能API接口等内容",
   "order": 0,
   "params": [
@@ -9,17 +9,22 @@
       "name": "应用系统名称",
       "type": "STRING",
       "defaultValue": "Nova",
+      "anonAccess": true,
       "description": "应用系统的名称,用于显示在浏览器标题等处"
-    },{
+    },
+    {
       "code": "FAV_ICO",
       "name": "应用系统图标",
       "type": "IMAGE",
+      "anonAccess": true,
       "defaultValue": "static/favicon.ico",
       "description": "浏览器标签页上显示的图标"
-    },{
+    },
+    {
       "code": "LOGIN_BG",
       "name": "登录页背景图",
       "type": "IMAGE",
+      "anonAccess": true,
       "defaultValue": "static/css/login/image/background.svg",
       "description": "登录页的整体背景图"
     },
@@ -27,12 +32,15 @@
       "code": "LOGIN_HEADER_BG",
       "name": "登录页顶部背景图片",
       "type": "IMAGE",
+      "anonAccess": true,
       "defaultValue": "static/favicon-64.png",
       "description": "登录页顶部背景图片"
-    },{
+    },
+    {
       "code": "LOGIN_COPYRIGHT",
       "name": "版权信息",
       "type": "STRING",
+      "anonAccess": true,
       "defaultValue": "©2020, GUOCHUANG SOFTWARE ALL RIGHTS RESERVED.科大国创软件股份有限公司版权提供技术支持",
       "description": "显示在登录页底部的版权信息,如果不设置则不会显示版权信息"
     },
@@ -40,9 +48,11 @@
       "code": "LOGIN_COPYRIGHT_COLOR",
       "name": "版权文字颜色",
       "type": "STRING",
+      "anonAccess": true,
       "defaultValue": "black",
       "description": "版权信息显示的文字颜色"
-    },{
+    },
+    {
       "code": "PASSWORD_TYPE",
       "name": "用户密码类型",
       "type": "SELECT",

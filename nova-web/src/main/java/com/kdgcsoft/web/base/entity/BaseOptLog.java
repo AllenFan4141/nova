@@ -8,8 +8,8 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import java.io.Serializable;
 import java.util.Date;
 
-import com.kdgcsoft.web.base.enums.Enabled;
 import com.kdgcsoft.web.base.enums.OptType;
+import com.kdgcsoft.web.base.enums.YesNo;
 import lombok.Data;
 
 /**
@@ -68,7 +68,7 @@ public class BaseOptLog extends BaseEntity implements Serializable {
     /**
      * 响应是否成功
      */
-    private Enabled success;
+    private YesNo success;
 
     /**
      * 响应结果

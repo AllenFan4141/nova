@@ -13,7 +13,9 @@ import com.kdgcsoft.web.config.security.detailservice.RootUserDetailService;
 import com.kdgcsoft.web.config.security.filter.JwtAuthenticationTokenFilter;
 import com.kdgcsoft.web.config.security.handler.JwtAuthenticationHandler;
 import com.kdgcsoft.web.config.security.handler.FormAuthenticationHandler;
-import com.kdgcsoft.web.config.security.scanner.AnonymousAccessScanner;
+import com.kdgcsoft.web.config.security.scanner.AnonAccess;
+import com.kdgcsoft.web.config.security.scanner.AnonAccessScanner;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.context.annotation.Bean;
@@ -47,13 +49,14 @@ import java.util.List;
 @Configuration
 @EnableWebSecurity
 @EnableGlobalMethodSecurity(prePostEnabled = true, securedEnabled = true)
-@Import(AnonymousAccessScanner.class)
+@Import(AnonAccessScanner.class)
+@Slf4j
 public class SecurityConfiguration {
     @Resource
     NovaProperties novaProperties;
 
     @Autowired
-    AnonymousAccessScanner anonymousAccessScanner;
+    AnonAccessScanner anonAccessScanner;
 
     @Autowired
     ApplicationEventPublisher applicationEventPublisher;
@@ -75,7 +78,7 @@ public class SecurityConfiguration {
     /**
      * 系统默认的白名单
      **/
-    public static String[] DEF_WHITE_LIST = {"/static/**", "/webjars/**"};
+    public static String[] DEF_WHITE_LIST = {"/static/**", "/webjars/**", "/anon/**"};
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {
@@ -86,6 +89,8 @@ public class SecurityConfiguration {
 
     @Bean
     SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
+        log.info("Application will run at fontbackend:" + novaProperties.isFontBackend());
+
         /**禁用csrf防御  springSecurity默认会开启,开启后会要求所有的post请求都需要带上csrf token, 因为不使用session**/
         http.csrf().disable();
         /**允许跨域**/
@@ -93,9 +98,9 @@ public class SecurityConfiguration {
         /**去除x-frame-options header 允许iframe嵌入**/
         http.headers().frameOptions().disable();
 
-        /**注解 {@link com.kdgcsoft.web.config.security.scanner.AnonymousAccess} 标记的controller方法允许匿名访问的url**/
+        /**注解 {@link AnonAccess} 标记的controller方法允许匿名访问的url**/
         ExpressionUrlAuthorizationConfigurer<HttpSecurity>.ExpressionInterceptUrlRegistry registry = http.authorizeRequests();
-        anonymousAccessScanner.getAnonymousUrls().forEach(url -> registry.antMatchers(url).permitAll());
+        anonAccessScanner.getAnonymousUrls().forEach(url -> registry.antMatchers(url).permitAll());
 
         List<String> whiteList = new ArrayList<>();
         whiteList.add(novaProperties.getLoginPageUrl());

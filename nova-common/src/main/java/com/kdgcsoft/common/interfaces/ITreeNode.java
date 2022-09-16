@@ -1,5 +1,8 @@
 package com.kdgcsoft.common.interfaces;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  * @author fyin
  * @date 2020-04-03 13:50
@@ -25,5 +28,18 @@ public interface ITreeNode<T> {
      *
      * @param node
      */
-    void addChild(T node);
+    default void addChild(T node) {
+        List<T> children = getChildren();
+        if (children == null) {
+            children = new ArrayList<T>();
+        }
+        children.add(node);
+    }
+
+    /**
+     * 返回叶子节点的list
+     *
+     * @return
+     */
+    List<T> getChildren();
 }

@@ -19,21 +19,17 @@
     <dependencies>
         <dependency>
             <groupId>com.kdgcsoft</groupId>
-            <artifactId>nova-web</artifactId>
+            <artifactId>nova-document</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>com.kdgcsoft</groupId>
-            <artifactId>nova-document</artifactId>
+            <artifactId>nova-web</artifactId>
             <version>1.0-SNAPSHOT</version>
         </dependency>
         <dependency>
             <groupId>org.postgresql</groupId>
             <artifactId>postgresql</artifactId>
-        </dependency>
-        <dependency>
-            <groupId>org.springframework.boot</groupId>
-            <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
     </dependencies>
 </project>

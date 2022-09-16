@@ -5,7 +5,7 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.kdgcsoft.common.anno.DicBind;
 import com.kdgcsoft.web.base.enums.DicType;
-import com.kdgcsoft.web.base.enums.Embed;
+import com.kdgcsoft.web.base.enums.YesNo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -49,7 +49,7 @@ public class BaseDic extends BaseEntity implements Serializable {
     private transient String dicType_text;
 
     @ApiModelProperty(value = "是否内置", notes = "内置字典是由程序自动加载的")
-    private Embed embed = Embed.N;
+    private YesNo embed = YesNo.N;
 
     @ApiModelProperty("备注")
     private String memo;

@@ -9,6 +9,7 @@ import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -21,6 +22,7 @@ import javax.validation.constraints.NotBlank;
  */
 @Api(value = "用户认证接口", tags = "用户认证接口")
 @RestController
+@Validated
 @RequestMapping("/auth")
 public class BaseAuthController extends BaseController {
 
@@ -29,7 +31,6 @@ public class BaseAuthController extends BaseController {
 
     @ApiOperation("登陆")
     @PostMapping("login")
-    @OptLog(title = "asdf", type = OptType.SELECT, operator = "#username")
     public JsonResult login(@ApiParam(value = "用户名", required = true) @NotBlank(message = "用户名不能为空") String username,
                             @ApiParam(value = "密码", required = true) @NotBlank(message = "密码不能为空") String password,
                             boolean rememberMe) {

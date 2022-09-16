@@ -3,14 +3,11 @@ package com.kdgcsoft.web.base.aspect;
 import cn.hutool.core.exceptions.ExceptionUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ArrayUtil;
-import cn.hutool.core.util.ClassUtil;
-import cn.hutool.core.util.ReflectUtil;
 import cn.hutool.core.util.StrUtil;
-import cn.hutool.http.HttpUtil;
 import com.alibaba.fastjson2.JSON;
 import com.kdgcsoft.web.base.anno.OptLog;
 import com.kdgcsoft.web.base.entity.BaseOptLog;
-import com.kdgcsoft.web.base.enums.Enabled;
+import com.kdgcsoft.web.base.enums.YesNo;
 import com.kdgcsoft.web.base.event.OptLogEvent;
 import com.kdgcsoft.web.common.consts.WebConst;
 import com.kdgcsoft.web.common.model.LoginUser;
@@ -37,7 +34,6 @@ import org.springframework.web.servlet.ModelAndView;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.lang.reflect.Method;
-import java.lang.reflect.Parameter;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
@@ -155,7 +151,7 @@ public class OptLogAspect {
      * 填充一些更丰富的日志信息
      */
     public void fillLogExtInfo(BaseOptLog optLog, OptLog logAnno, Object result, Throwable throwable, Map<String, Object> paramsMap) {
-        optLog.setSuccess(throwable == null ? Enabled.Y : Enabled.N);
+        optLog.setSuccess(throwable == null ? YesNo.Y : YesNo.N);
         /**记录请求参数,如果是文件或者spring内置的一些类型则不记录**/
         if (logAnno.logRequest()) {
             Map<String, Object> logParams = new HashMap<>();

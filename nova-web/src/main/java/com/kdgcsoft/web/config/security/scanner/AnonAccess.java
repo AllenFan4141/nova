@@ -6,5 +6,5 @@ package com.kdgcsoft.web.config.security.scanner;
  * @author fyin
  * @date 2022年08月18日 14:49
  */
-public @interface AnonymousAccess {
+public @interface AnonAccess {
 }

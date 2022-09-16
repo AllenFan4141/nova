@@ -19,13 +19,13 @@ import java.util.regex.Pattern;
 
 /**
  * 匿名访问扫描器
- * {@link AnonymousAccess} 标记的controller方法允许匿名访问的url
+ * {@link AnonAccess} 标记的controller方法允许匿名访问的url
  *
  * @author fyin
  * @date 2022年08月18日 14:47
  */
 @Component
-public class AnonymousAccessScanner implements InitializingBean, ApplicationContextAware {
+public class AnonAccessScanner implements InitializingBean, ApplicationContextAware {
     private static final Pattern PATTERN = Pattern.compile("\\{(.*?)\\}");
     public static final String ASTERISK = "*";
 
@@ -43,12 +43,12 @@ public class AnonymousAccessScanner implements InitializingBean, ApplicationCont
             HandlerMethod handlerMethod = map.get(info);
 
             // 获取方法上边的注解 替代path variable 为 *
-            AnonymousAccess method = AnnotationUtils.findAnnotation(handlerMethod.getMethod(), AnonymousAccess.class);
+            AnonAccess method = AnnotationUtils.findAnnotation(handlerMethod.getMethod(), AnonAccess.class);
             Optional.ofNullable(method).ifPresent(anonymous -> info.getPatternsCondition().getPatterns()
                     .forEach(url -> anonymousUrls.add(ReUtil.replaceAll(url, PATTERN, ASTERISK))));
 
             // 获取类上边的注解, 替代path variable 为 *
-            AnonymousAccess controller = AnnotationUtils.findAnnotation(handlerMethod.getBeanType(), AnonymousAccess.class);
+            AnonAccess controller = AnnotationUtils.findAnnotation(handlerMethod.getBeanType(), AnonAccess.class);
             Optional.ofNullable(controller).ifPresent(anonymous -> info.getPatternsCondition().getPatterns()
                     .forEach(url -> anonymousUrls.add(ReUtil.replaceAll(url, PATTERN, ASTERISK))));
         });

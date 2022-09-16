@@ -1,16 +1,14 @@
 package com.kdgcsoft.web.base.entity;
 
-import cn.hutool.core.convert.BasicType;
 import cn.hutool.core.convert.Convert;
-import cn.hutool.core.util.IdUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.kdgcsoft.common.util.NovaUtil;
-import com.kdgcsoft.web.base.enums.Embed;
 import com.kdgcsoft.web.base.enums.ParamType;
+import com.kdgcsoft.web.base.enums.YesNo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -50,7 +48,10 @@ public class BaseParam extends BaseEntity implements Serializable {
     private ParamType paramType;
 
     @ApiModelProperty("是否内置")
-    private Embed embed = Embed.N;
+    private YesNo embed = YesNo.N;
+
+    @ApiModelProperty("是否允许匿名访问")
+    private YesNo anonAccess = YesNo.N;
 
     @ApiModelProperty("说明")
     private String description;

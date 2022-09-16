@@ -2,6 +2,7 @@ package com.kdgcsoft.web.module;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.io.FileUtil;
+import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.StrUtil;
 import com.alibaba.fastjson2.JSON;
@@ -12,9 +13,8 @@ import com.kdgcsoft.web.base.entity.BaseDicItem;
 import com.kdgcsoft.web.base.entity.BaseMenu;
 import com.kdgcsoft.web.base.entity.BaseParam;
 import com.kdgcsoft.web.base.enums.DicType;
-import com.kdgcsoft.web.base.enums.Embed;
-import com.kdgcsoft.web.base.enums.Enabled;
 import com.kdgcsoft.web.base.enums.MenuOpenType;
+import com.kdgcsoft.web.base.enums.YesNo;
 import com.kdgcsoft.web.base.service.BaseDicItemService;
 import com.kdgcsoft.web.base.service.BaseDicService;
 import com.kdgcsoft.web.base.service.BaseMenuService;
@@ -51,7 +51,7 @@ public class ModuleManager {
      */
     public static final String MODULE_RESOURCE = "classpath*:nova-module.json";
     private final PathMatchingResourcePatternResolver pathResolver = new PathMatchingResourcePatternResolver();
-    private final ConfigurableApplicationContext applicationContext;
+    private ConfigurableApplicationContext applicationContext;
     /**
      * ModuleManager是否初始化完成
      */
@@ -204,7 +204,8 @@ public class ModuleManager {
                         dbParam.setModuleCode(m.getCode());
                         dbParam.setName(p.getName());
                         dbParam.setCode(m.getCode() + StrUtil.DOT + p.getCode());
-                        dbParam.setEmbed(Embed.Y);
+                        dbParam.setEmbed(YesNo.Y);
+                        dbParam.setAnonAccess(YesNo.ofBoolean(p.isAnonAccess()));
                         dbParam.setParamType(p.getType());
                         dbParam.setDefaultValue(p.getDefaultValue());
                         dbParam.setValue(p.getDefaultValue());
@@ -220,6 +221,7 @@ public class ModuleManager {
                             }
                             dbParam.setName(p.getName());
                             dbParam.setParamType(p.getType());
+                            dbParam.setAnonAccess(YesNo.ofBoolean(p.isAnonAccess()));
                             dbParam.setDefaultValue(p.getDefaultValue());
                             dbParam.setDescription(p.getDescription());
                             saveParamList.add(dbParam);
@@ -249,7 +251,7 @@ public class ModuleManager {
                 dbDic = new BaseDic();
                 dbDic.setCode(d.getCode());
                 dbDic.setName(d.getName());
-                dbDic.setEmbed(Embed.Y);
+                dbDic.setEmbed(YesNo.Y);
                 dbDic.setDicType(DicType.LIST);
                 dbDic.setMemo(d.getDescription());
                 saveDicList.add(dbDic);
@@ -261,7 +263,7 @@ public class ModuleManager {
                 if (dbDicItem == null) {
                     dbDicItem = new BaseDicItem();
                     dbDicItem.setPid(0L);
-                    dbDicItem.setEmbed(Embed.Y);
+                    dbDicItem.setEmbed(YesNo.Y);
                     dbDicItem.setDicCode(d.getCode());
                     dbDicItem.setValue(o.getKey());
                     dbDicItem.setText(o.getValue());
@@ -310,16 +312,15 @@ public class ModuleManager {
      */
     private void buildUpdateMenus(List<BaseMenu> allDbMenus, List<BaseMenu> saveMenuList, List<ModuleMenu> moduleMenus, String pMenuCode) {
         CollUtil.forEach(moduleMenus, (menu, index) -> {
-            BaseMenu one = CollUtil.findOne(allDbMenus, dbMenu -> dbMenu.getCode()
-                    .equals(menu.getCode()));
+            BaseMenu one = CollUtil.findOne(allDbMenus, dbMenu -> dbMenu.getCode().equals(menu.getCode()));
             if (one == null) {
                 one = new BaseMenu();
                 one.setPcode(pMenuCode);
                 one.setCode(menu.getCode());
                 one.setName(menu.getName());
                 one.setUrl(menu.getUrl());
-                one.setEmbed(Embed.Y);
-                one.setEnabled(Enabled.Y);
+                one.setEmbed(YesNo.Y);
+                one.setEnabled(YesNo.Y);
                 one.setOpenType(MenuOpenType.TAB);
                 one.setOrderNo(index);
                 saveMenuList.add(one);
@@ -453,6 +454,39 @@ public class ModuleManager {
             return null;
         }
     }
+
+    /**
+     * 获取可匿名访问的[参数key-value]的map
+     *
+     * @return
+     */
+    public Map<String, Object> getAnonParamsValueMap() {
+        Map<String, Object> map = MapUtil.newHashMap();
+        for (String key : this.paramsMap.keySet()) {
+            BaseParam param = this.paramsMap.get(key);
+            if (param.getAnonAccess().isY()) {
+                map.put(key, param.getValue());
+            }
+        }
+        return map;
+    }
+
+    /**
+     * 获取可匿名访问的[参数key-格式化后的值]的map
+     *
+     * @return
+     */
+    public Map<String, Object> getAnonParamsFmtValueMap() {
+        Map<String, Object> map = MapUtil.newHashMap();
+        for (String key : this.paramsMap.keySet()) {
+            BaseParam param = this.paramsMap.get(key);
+            if (param.getAnonAccess().isY()) {
+                map.put(key, param.getValue());
+            }
+        }
+        return map;
+    }
+
 
     /**
      * 获得参数的默认值

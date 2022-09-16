@@ -1,12 +1,11 @@
 package com.kdgcsoft.web.base.entity;
 
-import cn.hutool.core.util.StrUtil;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.kdgcsoft.common.interfaces.ITreeNode;
-import com.kdgcsoft.web.base.enums.Embed;
-import com.kdgcsoft.web.base.enums.Enabled;
 import com.kdgcsoft.web.base.enums.MenuOpenType;
+import com.kdgcsoft.web.base.enums.YesNo;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
@@ -14,7 +13,6 @@ import lombok.Setter;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -47,7 +45,7 @@ public class BaseMenu extends BaseEntity implements Serializable, ITreeNode<Base
     private String icon;
 
     @ApiModelProperty(value = "是否内置", notes = "内置菜单由程序自动加载,不可删除,可修改部分属性")
-    private Embed embed = Embed.N;
+    private YesNo embed = YesNo.N;
 
     @ApiModelProperty("打开方式")
     private MenuOpenType openType;
@@ -57,12 +55,10 @@ public class BaseMenu extends BaseEntity implements Serializable, ITreeNode<Base
 
 
     @ApiModelProperty("是否启用")
-    private Enabled enabled = Enabled.N;
+    private YesNo enabled = YesNo.N;
 
-    private transient List<ITreeNode> children;
-
-    private transient String text;
-    private transient String iconCls;
+    @TableField(exist = false)
+    private List<BaseMenu> children;
 
     @Override
     public Object id() {
@@ -72,22 +68,5 @@ public class BaseMenu extends BaseEntity implements Serializable, ITreeNode<Base
     @Override
     public Object pid() {
         return this.pcode;
-    }
-
-    @Override
-    public void addChild(BaseMenu node) {
-        if (children == null) {
-            children = new ArrayList<>();
-        }
-        children.add(node);
-    }
-
-    public String getText() {
-        return this.name;
-    }
-
-
-    public String getIconCls() {
-        return StrUtil.isNotEmpty(this.icon) ? "icon " + this.icon : "icon icon-window";
     }
 }

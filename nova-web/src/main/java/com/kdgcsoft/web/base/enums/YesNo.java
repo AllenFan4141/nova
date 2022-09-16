@@ -8,25 +8,33 @@ import com.kdgcsoft.common.interfaces.IDic;
  * @author fyin
  * @date 2021-05-11 14:26
  */
-@Dic("是否内置")
-public enum Embed implements IDic {
+@Dic("是否")
+public enum YesNo implements IDic {
     /**
      * 启用
      */
-    Y("内置"),
+    Y("是"),
     /**
      * 停用
      */
-    N("非内置");
+    N("否");
 
     private String text;
 
-    Embed(String text) {
+    YesNo(String text) {
         this.text = text;
     }
 
     @Override
     public String text() {
         return this.text;
+    }
+
+    public static YesNo ofBoolean(boolean trueOrFalse) {
+        return trueOrFalse ? YesNo.Y : YesNo.N;
+    }
+
+    public boolean isY() {
+        return this.equals(YesNo.Y);
     }
 }

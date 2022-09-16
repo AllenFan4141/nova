@@ -31,6 +31,8 @@
         <mybatis-plus-boot.version>3.5.2</mybatis-plus-boot.version>
         <!--druid是一款国产开源Java数据库连接池 springboot-starter版本-->
         <druid-stater.version>1.2.12</druid-stater.version>
+        <!--beetl是一款优秀的国产化java模版引擎-->
+        <beetl.version>3.10.0.RELEASE</beetl.version>
         <!--jwt解析器-->
         <jwt.version>0.9.1</jwt.version>
         <!-- 解析客户端操作系统、浏览器等-->
@@ -98,6 +100,11 @@
                 <groupId>com.alibaba.fastjson2</groupId>
                 <artifactId>fastjson2</artifactId>
                 <version>${fastjson2.version}</version>
+            </dependency>
+            <dependency>
+                <groupId>com.ibeetl</groupId>
+                <artifactId>beetl</artifactId>
+                <version>${beetl.version}</version>
             </dependency>
             <dependency>
                 <groupId>com.lmax</groupId>
