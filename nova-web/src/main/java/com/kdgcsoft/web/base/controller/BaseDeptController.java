@@ -23,7 +23,8 @@ import javax.validation.constraints.NotNull;
 @RequestMapping("/baseDept")
 public class BaseDeptController extends BaseController {
 
-
+    // abcda
+    
     @Autowired
     BaseDeptService baseService;
 
