@@ -6,12 +6,14 @@ import com.baomidou.mybatisplus.annotation.TableName;
 import com.kdgcsoft.common.interfaces.ITreeNode;
 import com.kdgcsoft.web.base.enums.MenuOpenType;
 import com.kdgcsoft.web.base.enums.YesNo;
+import com.kdgcsoft.web.common.consts.WebConst;
 import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
 import java.io.Serializable;
 import java.util.List;
 
@@ -30,12 +32,14 @@ public class BaseMenu extends BaseEntity implements Serializable, ITreeNode<Base
     private Long id;
 
     @ApiModelProperty("上级菜单编码")
-    private String pcode;
+    private String pcode = WebConst.DEF_TREE_ROOT_ID.toString();
 
     @ApiModelProperty("菜单编码")
+    @NotBlank(message = "菜单编码不能为空")
     private String code;
 
     @ApiModelProperty(value = "名称", notes = "菜单的标题文字")
+    @NotBlank(message = "菜单名称不能为空")
     private String name;
 
     @ApiModelProperty("地址")
@@ -48,7 +52,7 @@ public class BaseMenu extends BaseEntity implements Serializable, ITreeNode<Base
     private YesNo embed = YesNo.N;
 
     @ApiModelProperty("打开方式")
-    private MenuOpenType openType;
+    private MenuOpenType openType = MenuOpenType.TAB;
 
     @ApiModelProperty("排序")
     private Integer orderNo;

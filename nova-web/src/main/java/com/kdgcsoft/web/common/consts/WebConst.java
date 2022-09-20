@@ -54,4 +54,9 @@ public class WebConst {
      */
     public static final String REDIS_JWT_CACHE = "redis";
 
+    /**
+     * 默认的树形结构的根节点ID
+     */
+    public static final Long DEF_TREE_ROOT_ID = 0L;
+
 }

@@ -184,8 +184,16 @@ public class BaseController {
          */
         public static final String GET_BY_ID = "/getById";
         /**
+         * 根据编码获取数据
+         */
+        public static final String GET_BY_CODE = "/getByCode";
+        /**
          * 根据ID删除数据
          */
         public static final String DEL_BY_ID = "/deleteById";
+        /**
+         * 根据编码删除数据
+         */
+        public static final String DEL_BY_CODE = "/deleteByCode";
     }
 }

@@ -7,10 +7,7 @@ import com.kdgcsoft.web.base.service.BaseOrgService;
 import com.kdgcsoft.web.common.model.JsonResult;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import javax.validation.constraints.NotNull;
 
@@ -26,7 +23,7 @@ public class BaseDeptController extends BaseController {
     BaseDeptService baseService;
 
     @PostMapping(Api.SAVE)
-    public JsonResult<BaseDept> save(@Validated BaseDept entity) {
+    public JsonResult<BaseDept> save(@Validated @RequestBody BaseDept entity) {
         //检查重复性
         if (baseService.hasRepeat(entity)) {
             return JsonResult.ERROR("组织机构编码重复");

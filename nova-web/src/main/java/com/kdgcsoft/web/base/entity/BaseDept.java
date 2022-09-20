@@ -6,8 +6,11 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.kdgcsoft.common.interfaces.ITreeNode;
 import com.kdgcsoft.web.base.enums.YesNo;
+import com.kdgcsoft.web.common.consts.WebConst;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,16 +33,22 @@ public class BaseDept extends BaseEntity implements Serializable, ITreeNode<Base
     /**
      * 上级部门ID
      */
-    private Long deptPid;
-
+    private Long deptPid = WebConst.DEF_TREE_ROOT_ID;
+    /**
+     * 组织机构ID
+     */
+    @NotNull(message = "组织机构不能为空")
+    private Long orgId;
     /**
      * 部门名称
      */
+    @NotBlank(message = "部门名称不能为空")
     private String deptName;
 
     /**
      * 部门编码
      */
+    @NotBlank(message = "部门编码不能为空")
     private String deptCode;
 
     /**
@@ -50,19 +59,16 @@ public class BaseDept extends BaseEntity implements Serializable, ITreeNode<Base
     /**
      * 启用
      */
-    private YesNo enabled;
+    private YesNo enabled = YesNo.Y;
 
     /**
      * 顺序号
      */
-    private String orderNo;
+    private Integer orderNo;
 
     @TableField(exist = false)
     private List<BaseDept> children;
-    /**
-     * 组织机构ID
-     */
-    private Long orgId;
+
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

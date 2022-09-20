@@ -28,6 +28,17 @@ public class BaseOrgService extends ServiceImpl<BaseOrgMapper, BaseOrg> {
         return TreeUtil.buildTree(this.listAllByOrder());
     }
 
+    /**
+     * 或者组织机构的所有的下级节点的ID
+     *
+     * @param orgId
+     * @return
+     */
+    public List<Long> getChildrenIds(Long orgId) {
+        List<BaseOrg> tree = tree();
+        BaseOrg org = TreeUtil.findOneById(tree, orgId);
+        return TreeUtil.getChildrenIds(org, Long.class);
+    }
 
     /**
      * 检查是否有编码重复的数据

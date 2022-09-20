@@ -6,8 +6,11 @@ import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.kdgcsoft.common.interfaces.ITreeNode;
 import com.kdgcsoft.web.base.enums.YesNo;
+import com.kdgcsoft.web.common.consts.WebConst;
 import lombok.Data;
 
+import javax.validation.constraints.NotBlank;
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Date;
@@ -30,16 +33,19 @@ public class BaseOrg extends BaseEntity implements Serializable, ITreeNode<BaseO
     /**
      * 上级组织ID
      */
-    private Long orgPid;
+    @NotNull(message = "上级组织机构ID不能为空")
+    private Long orgPid = WebConst.DEF_TREE_ROOT_ID;
 
     /**
      * 组织机构名称
      */
+    @NotBlank(message = "组织机构名称不能为空")
     private String orgName;
 
     /**
      * 组织机构编码
      */
+    @NotBlank(message = "组织机构编码不能为空")
     private String orgCode;
 
     /**
@@ -50,12 +56,12 @@ public class BaseOrg extends BaseEntity implements Serializable, ITreeNode<BaseO
     /**
      * 启用
      */
-    private YesNo enabled;
+    private YesNo enabled = YesNo.Y;
 
     /**
      * 顺序号
      */
-    private String orderNo;
+    private Integer orderNo;
 
     @TableField(exist = false)
     private List<BaseOrg> children;

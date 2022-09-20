@@ -1,6 +1,7 @@
 package com.kdgcsoft.web.base.entity;
 
 import com.baomidou.mybatisplus.annotation.IdType;
+import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.kdgcsoft.common.anno.DicBind;
@@ -12,6 +13,7 @@ import lombok.Getter;
 import lombok.Setter;
 import lombok.experimental.Accessors;
 
+import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.NotEmpty;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -32,10 +34,10 @@ public class BaseDic extends BaseEntity implements Serializable {
     private Long id;
 
     @ApiModelProperty("编码")
-    @NotEmpty(message = "字典编码不能为空")
+    @NotBlank(message = "字典编码不能为空")
     private String code;
 
-    @NotEmpty(message = "字典名称不能为空")
+    @NotBlank(message = "字典名称不能为空")
     @ApiModelProperty("名称")
     private String name;
 
@@ -54,8 +56,8 @@ public class BaseDic extends BaseEntity implements Serializable {
     @ApiModelProperty("备注")
     private String memo;
 
-
-    private transient List<BaseDicItem> items = new ArrayList<>();
+    @TableField(exist = false)
+    private List<BaseDicItem> items = new ArrayList<>();
 
     public void addItem(String text, String value, int order) {
         if (items == null) {

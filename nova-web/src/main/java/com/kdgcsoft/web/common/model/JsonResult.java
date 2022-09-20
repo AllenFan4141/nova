@@ -2,6 +2,7 @@ package com.kdgcsoft.web.common.model;
 
 import cn.hutool.http.HttpStatus;
 import com.alibaba.fastjson2.JSON;
+import com.fasterxml.jackson.annotation.JsonInclude;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -42,6 +43,7 @@ public class JsonResult<T> implements Serializable {
     /**
      * 返回的数据
      */
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private T data;
 
     public JsonResult() {

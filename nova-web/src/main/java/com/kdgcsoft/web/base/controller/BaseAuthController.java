@@ -1,12 +1,11 @@
 package com.kdgcsoft.web.base.controller;
 
-import com.kdgcsoft.web.base.model.LoginBody;
+import com.kdgcsoft.web.base.vo.LoginVo;
 import com.kdgcsoft.web.base.service.BaseAuthService;
 import com.kdgcsoft.web.common.consts.I18N;
 import com.kdgcsoft.web.common.model.JsonResult;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
-import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.Valid;
-import javax.validation.constraints.NotBlank;
 
 /**
  * @author fyin
@@ -32,8 +30,8 @@ public class BaseAuthController extends BaseController {
 
     @ApiOperation("登陆")
     @PostMapping(Api.LOGIN)
-    public JsonResult login(@RequestBody @Valid LoginBody loginBody) {
-        return baseAuthService.login(loginBody.getUsername(), loginBody.getPassword(), loginBody.isRememberMe());
+    public JsonResult login(@RequestBody @Valid LoginVo loginVo) {
+        return baseAuthService.login(loginVo.getUsername(), loginVo.getPassword(), loginVo.isRememberMe());
     }
 
     /**

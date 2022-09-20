@@ -64,6 +64,10 @@ public enum OptType implements IDic {
      */
     PUBLISH("发布"),
     /**
+     * 越权访问
+     */
+    UN_AUTH_ACCESS("越权访问"),
+    /**
      * 其他
      */
     OTHER("其他");

@@ -10,6 +10,7 @@ import io.swagger.annotations.ApiModel;
 import io.swagger.annotations.ApiModelProperty;
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 import lombok.experimental.Accessors;
 
 import java.io.Serializable;
@@ -24,6 +25,7 @@ import java.util.List;
 @Setter
 @Getter
 @Accessors(chain = true)
+@ToString
 public class BaseDicItem extends BaseEntity implements ITreeNode<BaseDicItem>, Serializable {
     @ApiModelProperty("主键")
     @TableId(type = IdType.AUTO)
@@ -67,5 +69,5 @@ public class BaseDicItem extends BaseEntity implements ITreeNode<BaseDicItem>, S
         return this.text;
     }
 
-    private transient String ptext;
+
 }

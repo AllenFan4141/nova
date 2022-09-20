@@ -45,25 +45,25 @@ public class BaseEntity {
     @ApiModelProperty(hidden = true)
     private Integer deleted = 0;
 
+    @JsonIgnore
     @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(hidden = true)
     private Long createBy;
 
+    @JsonIgnore
     @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(hidden = true)
     private Long modifyBy;
 
+    @JsonIgnore
     @TableField(fill = FieldFill.INSERT)
     @ApiModelProperty(hidden = true)
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(serialize = false)
     private Date createTime;
 
+    @JsonIgnore
     @TableField(fill = FieldFill.INSERT_UPDATE)
     @ApiModelProperty(hidden = true)
-    @JSONField(format = "yyyy-MM-dd HH:mm:ss")
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-    @DateTimeFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    @JSONField(serialize = false)
     private Date modifyTime;
 }

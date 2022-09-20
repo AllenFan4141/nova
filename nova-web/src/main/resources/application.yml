@@ -2,7 +2,6 @@ nova:
   name: nova
 spring:
   jackson:
-    default-property-inclusion: non_null
     date-format: yyyy-MM-dd HH:mm:ss
     time-zone: GMT+8
   mvc:

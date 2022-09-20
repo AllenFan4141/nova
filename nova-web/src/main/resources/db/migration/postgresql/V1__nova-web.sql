@@ -187,7 +187,7 @@ comment on column base_menu.modify_time is '最后修改时间';
 create table if not exists base_user
 (
     user_id              bigserial
-            primary key,
+        primary key,
     org_id               bigint,
     dept_id              bigint,
     login_name           varchar,
@@ -266,8 +266,8 @@ create table if not exists base_org
     org_code      varchar,
     org_full_name varchar,
     enabled       varchar,
-    order_no      varchar,
-    deleted        integer,
+    order_no      integer,
+    deleted       integer,
     create_by     bigint,
     modify_by     bigint,
     create_time   timestamp,
@@ -303,15 +303,15 @@ comment on column base_org.modify_time is '最后修改时间';
 create table if not exists base_dept
 (
     dept_id        bigserial
-        primary key ,
+        primary key,
     dept_pid       bigint,
     org_id         bigint,
     dept_name      varchar,
     dept_code      varchar,
     dept_full_name varchar,
     enabled        varchar,
-    order_no       varchar,
-    deleted         integer,
+    order_no       integer,
+    deleted        integer,
     create_by      bigint,
     modify_by      bigint,
     create_time    timestamp(6),
@@ -352,7 +352,7 @@ comment on column base_dept.modify_time is '最后修改时间';
 create table if not exists base_opt_log
 (
     log_id          bigserial
-            primary key,
+        primary key,
     log_title       varchar,
     log_url         varchar,
     http_method     varchar,
@@ -418,6 +418,92 @@ comment on column base_opt_log.modify_by is '最后修改人';
 comment on column base_opt_log.create_time is '创建时间';
 
 comment on column base_opt_log.modify_time is '修改时间';
+
+
+create table if not exists base_role
+(
+    role_id     bigserial
+        primary key,
+    org_id      bigint,
+    role_name   varchar,
+    role_type   varchar,
+    enabled     varchar,
+    deleted     integer,
+    create_by   bigint,
+    modify_by   bigint,
+    create_time timestamp,
+    modify_time timestamp
+);
+
+comment on table base_role is '角色';
+
+comment on column base_role.role_id is '角色ID';
+
+comment on column base_role.org_id is '所属组织机构ID';
+
+comment on column base_role.role_name is '角色名称';
+
+comment on column base_role.role_type is '角色类型';
+
+comment on column base_role.enabled is '启用状态';
+
+comment on column base_role.deleted is '逻辑删除';
+
+comment on column base_role.create_by is '创建人';
+
+comment on column base_role.modify_by is '最后修改人';
+
+comment on column base_role.create_time is '创建时间';
+
+comment on column base_role.modify_time is '最后修改时间';
+
+
+create table if not exists base_role_auth
+(
+    id          bigserial
+        primary key,
+    role_id     bigint,
+    auth_code   varchar,
+    auth_type   varchar,
+    create_by   bigint,
+    modify_by   bigint,
+    create_time timestamp,
+    modify_time timestamp
+);
+
+comment on table base_role_auth is '角色权限';
+
+comment on column base_role_auth.id is '主键';
+
+comment on column base_role_auth.role_id is '角色ID';
+
+comment on column base_role_auth.auth_code is '权限编码';
+
+comment on column base_role_auth.auth_type is '权限类型';
+
+comment on column base_role_auth.create_by is '创建人';
+
+comment on column base_role_auth.modify_by is '最后修改人';
+
+comment on column base_role_auth.create_time is '创建时间';
+
+comment on column base_role_auth.modify_time is '最后修改时间';
+
+create table if not exists base_role_user
+(
+    id      bigserial
+        primary key,
+    role_id bigint,
+    user_id bigint
+);
+
+comment on table base_role_user is '角色用户表';
+
+comment on column base_role_user.id is '主键';
+
+comment on column base_role_user.role_id is '角色id';
+
+comment on column base_role_user.user_id is '用户ID';
 
 
 

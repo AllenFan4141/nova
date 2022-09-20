@@ -39,6 +39,7 @@ const assetsCDN = {
 
 // vue.config.js
 const vueConfig = {
+  lintOnSave: false,
   configureWebpack: {
     // webpack plugins
     plugins: [

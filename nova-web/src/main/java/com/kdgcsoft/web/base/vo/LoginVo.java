@@ -1,4 +1,4 @@
-package com.kdgcsoft.web.base.model;
+package com.kdgcsoft.web.base.vo;
 
 import lombok.Getter;
 import lombok.Setter;
@@ -11,7 +11,7 @@ import javax.validation.constraints.NotBlank;
  */
 @Setter
 @Getter
-public class LoginBody {
+public class LoginVo {
     @NotBlank(message = "用户名不能为空")
     private String username;
     @NotBlank(message = "密码不能为空")

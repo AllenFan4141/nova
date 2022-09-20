@@ -4,6 +4,8 @@ import cn.hutool.core.lang.Opt;
 import com.kdgcsoft.web.base.entity.BaseUser;
 import com.kdgcsoft.web.base.service.BaseUserService;
 import com.kdgcsoft.web.common.model.JsonResult;
+import com.kdgcsoft.web.common.model.PageRequest;
+import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,6 +28,15 @@ public class BaseUserController extends BaseController {
 
     @Autowired
     BaseUserService baseService;
+
+    @GetMapping(Api.PAGE)
+    public JsonResult page(PageRequest pageRequest, @ApiParam(value = "组织机构ID") Long orgId,
+                           @ApiParam(value = "模糊搜索用户名") String search) {
+        if (orgId != null) {
+            baseService.pageUserByOrgId(pageRequest, orgId, search);
+        }
+        return JsonResult.OK().data(pageRequest);
+    }
 
     @PostMapping(Api.SAVE)
     public JsonResult<BaseUser> save(@Validated BaseUser entity) {

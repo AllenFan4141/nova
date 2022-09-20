@@ -2,6 +2,7 @@ package com.kdgcsoft.common.util;
 
 import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.ObjectUtil;
+import cn.hutool.extra.spring.SpringUtil;
 import com.kdgcsoft.common.interfaces.ITreeNode;
 
 import java.util.ArrayList;
@@ -53,5 +54,50 @@ public class TreeUtil {
             });
         }
         return tree;
+    }
+
+    /**
+     * 从树形节点列表中查找到指定ID的节点
+     *
+     * @param nodeList
+     * @param id
+     * @param <T>
+     * @return
+     */
+    public static <T extends ITreeNode> T findOneById(List<? extends ITreeNode> nodeList, Object id) {
+        if (CollUtil.isEmpty(nodeList)) {
+            return null;
+        } else {
+            for (ITreeNode node : nodeList) {
+                if (node.id().equals(id)) {
+                    return (T) node;
+                } else {
+                    if (CollUtil.isNotEmpty(node.getChildren())) {
+                        return TreeUtil.findOneById((List<? extends ITreeNode>) node.getChildren(), id);
+                    }
+                }
+            }
+        }
+        return null;
+    }
+
+
+    public static <T> List<T> getChildrenIds(ITreeNode node, Class<T> idType) {
+        List<T> childIds = new ArrayList<>();
+        if (node != null) {
+            getChildrenIds(node, childIds);
+        }
+        return childIds;
+    }
+
+    public static <T> void getChildrenIds(ITreeNode<? extends ITreeNode> node, List<T> list) {
+        if (CollUtil.isNotEmpty(node.getChildren())) {
+            for (ITreeNode iTreeNode : node.getChildren()) {
+                if (iTreeNode.id() != null) {
+                    list.add((T) iTreeNode.id());
+                }
+                getChildrenIds((ITreeNode<? extends ITreeNode>) iTreeNode.getChildren(), list);
+            }
+        }
     }
 }

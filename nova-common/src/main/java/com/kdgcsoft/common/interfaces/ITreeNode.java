@@ -8,7 +8,7 @@ import java.util.List;
  * @date 2020-04-03 13:50
  * 树形节点接口 实现此接口的类 可以使TreeBuilder将List<ITreeNode>构建成树形结构
  */
-public interface ITreeNode<T> {
+public interface ITreeNode<T extends ITreeNode> {
     /**
      * 节点ID
      *

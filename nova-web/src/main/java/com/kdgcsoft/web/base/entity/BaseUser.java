@@ -113,6 +113,11 @@ public class BaseUser extends BaseEntity implements Serializable {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
+    @TableField(exist = false)
+    private String orgName;
+    @TableField(exist = false)
+    private String deptName;
+
 
     public LoginUser toLoginUser() {
         LoginUser loginUser = new LoginUser();
