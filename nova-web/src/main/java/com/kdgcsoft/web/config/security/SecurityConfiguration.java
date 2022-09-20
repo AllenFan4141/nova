@@ -78,7 +78,7 @@ public class SecurityConfiguration {
     /**
      * 系统默认的白名单
      **/
-    public static String[] DEF_WHITE_LIST = {"/static/**", "/webjars/**", "/anon/**"};
+    public static String[] DEF_WHITE_LIST = {"/static/**", "/webjars/**", "/anon/**","/doc.html", "/swagger-resources/**", "/v2/api-docs"};
 
     @Bean
     public WebSecurityCustomizer webSecurityCustomizer() {

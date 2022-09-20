@@ -4,9 +4,9 @@ import cn.hutool.http.HttpStatus;
 import com.alibaba.fastjson2.JSON;
 import lombok.Getter;
 import lombok.Setter;
-import org.omg.CORBA.PUBLIC_MEMBER;
 
 import java.io.Serializable;
+import java.util.function.Consumer;
 import java.util.function.Supplier;
 
 /**
@@ -83,13 +83,28 @@ public class JsonResult<T> implements Serializable {
         return this;
     }
 
+    public JsonResult setSuccess(Boolean success) {
+        this.success = success;
+        return this;
+    }
+
+    public JsonResult ifSuccessOfElse(Consumer<JsonResult> successAction, Consumer<JsonResult> errorAction) {
+        if (this.success) {
+            successAction.accept(this);
+        } else {
+            errorAction.accept(this);
+        }
+        return this;
+    }
+
+
     /**
      * 如果JsonResult success为 true 则进行函数调用 返回函数返回值,方便代码链式编程
      *
      * @param supplier
      * @return
      */
-    public JsonResult successThen(Supplier<JsonResult> supplier) {
+    public JsonResult successThen(Supplier<? extends JsonResult> supplier) {
         if (this.success) {
             return supplier.get();
         } else {

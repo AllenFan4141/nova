@@ -2,7 +2,7 @@ nova:
   name: Nova框架示例项目
   sql:
     print: true
-  font-backend: false
+  font-backend: true
 spring:
   datasource:
     url: jdbc:postgresql://127.0.0.1:5432/nova

@@ -5,6 +5,7 @@ import cn.hutool.core.io.FileUtil;
 import cn.hutool.core.map.MapUtil;
 import cn.hutool.core.util.ClassUtil;
 import cn.hutool.core.util.StrUtil;
+import cn.hutool.extra.spring.SpringUtil;
 import com.alibaba.fastjson2.JSON;
 import com.kdgcsoft.common.anno.Dic;
 import com.kdgcsoft.common.interfaces.IDic;
@@ -33,6 +34,7 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.context.ConfigurableApplicationContext;
 import org.springframework.core.io.Resource;
 import org.springframework.core.io.support.PathMatchingResourcePatternResolver;
+import org.springframework.stereotype.Controller;
 
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
@@ -92,7 +94,6 @@ public class ModuleManager {
         this.baseDicService = applicationContext.getBean(BaseDicService.class);
         this.baseDicItemService = applicationContext.getBean(BaseDicItemService.class);
         this.baseMenuService = applicationContext.getBean(BaseMenuService.class);
-
     }
 
     /**

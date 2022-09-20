@@ -28,6 +28,8 @@ import static com.kdgcsoft.web.common.consts.WebConst.*;
  * @date 2022年08月30日 10:44
  */
 public class BaseController {
+
+
     @Autowired
     public HttpServletRequest request;
     @Autowired
@@ -47,8 +49,7 @@ public class BaseController {
      */
     public HttpHeaders buildDownloadHeader(String fileName) {
         try {
-            String header = request.getHeader("User-Agent")
-                    .toUpperCase();
+            String header = request.getHeader("User-Agent").toUpperCase();
             /**
              * IE低版本会有MSIE,IE11高版本没有可以通过TRIDENT判断
              */
@@ -78,55 +79,35 @@ public class BaseController {
         if (file == null) {
             return null;
         }
-        return ResponseEntity.ok()
-                .headers(buildDownloadHeader(file.getName()))
-                .contentLength(file.length())
-                .contentType(MediaType.parseMediaType("application/octet-stream"))
-                .body(new FileSystemResource(file));
+        return ResponseEntity.ok().headers(buildDownloadHeader(file.getName())).contentLength(file.length()).contentType(MediaType.parseMediaType("application/octet-stream")).body(new FileSystemResource(file));
     }
 
     public ResponseEntity<InputStreamResource> renderFile(InputStream inputStream, String fileName, long size) {
         if (inputStream == null) {
             return null;
         }
-        return ResponseEntity.ok()
-                .headers(buildDownloadHeader(fileName))
-                .contentLength(size)
-                .contentType(MediaType.parseMediaType("application/octet-stream"))
-                .body(new InputStreamResource(inputStream));
+        return ResponseEntity.ok().headers(buildDownloadHeader(fileName)).contentLength(size).contentType(MediaType.parseMediaType("application/octet-stream")).body(new InputStreamResource(inputStream));
     }
 
     public ResponseEntity<FileSystemResource> renderFile(File file, String fileType) {
         if (file == null) {
             return null;
         }
-        return ResponseEntity.ok()
-                .headers(buildDownloadHeader(file.getName()))
-                .contentLength(file.length())
-                .contentType(MediaType.parseMediaType(fileType))
-                .body(new FileSystemResource(file));
+        return ResponseEntity.ok().headers(buildDownloadHeader(file.getName())).contentLength(file.length()).contentType(MediaType.parseMediaType(fileType)).body(new FileSystemResource(file));
     }
 
     public ResponseEntity<ByteArrayResource> renderFile(byte[] bytes, String fileType, String fileName) {
         if (bytes.length < 1) {
             return null;
         }
-        return ResponseEntity.ok()
-                .headers(buildDownloadHeader(fileName))
-                .contentLength(bytes.length)
-                .contentType(StrUtil.isNotEmpty(fileType) ? MediaType.parseMediaType(fileType) : MediaType.parseMediaType("application/octet-stream"))
-                .body(new ByteArrayResource(bytes));
+        return ResponseEntity.ok().headers(buildDownloadHeader(fileName)).contentLength(bytes.length).contentType(StrUtil.isNotEmpty(fileType) ? MediaType.parseMediaType(fileType) : MediaType.parseMediaType("application/octet-stream")).body(new ByteArrayResource(bytes));
     }
 
     public ResponseEntity<ByteArrayResource> renderFile(byte[] bytes, String fileName) {
         if (bytes.length < 1) {
             return null;
         }
-        return ResponseEntity.ok()
-                .headers(buildDownloadHeader(fileName))
-                .contentLength(bytes.length)
-                .contentType(MediaType.parseMediaType("application/octet-stream"))
-                .body(new ByteArrayResource(bytes));
+        return ResponseEntity.ok().headers(buildDownloadHeader(fileName)).contentLength(bytes.length).contentType(MediaType.parseMediaType("application/octet-stream")).body(new ByteArrayResource(bytes));
     }
 
     public void renderImage(byte[] bytes, String imageName) {
@@ -169,4 +150,42 @@ public class BaseController {
         return params;
     }
 
+    /**
+     * 定义一些常用接口的通用命名
+     */
+    public static class Api {
+        /**
+         * 登录
+         */
+        public static final String LOGIN = "/login";
+        /**
+         * 退出登录
+         */
+        public static final String LOGOUT = "/logout";
+        /**
+         * 保存接口的通用命名
+         */
+        public static final String SAVE = "/save";
+        /**
+         * 分页查询数据
+         */
+        public static final String PAGE = "/page";
+        /**
+         * 列表查询数据
+         */
+        public static final String LIST = "/list";
+
+        /**
+         * 树形查询数据
+         */
+        public static final String TREE = "/tree";
+        /**
+         * 根据ID获取数据
+         */
+        public static final String GET_BY_ID = "/getById";
+        /**
+         * 根据ID删除数据
+         */
+        public static final String DEL_BY_ID = "/deleteById";
+    }
 }

@@ -9,6 +9,7 @@ import org.hibernate.validator.internal.engine.path.PathImpl;
 import org.springframework.validation.BindException;
 import org.springframework.validation.FieldError;
 import org.springframework.validation.beanvalidation.SpringValidatorAdapter;
+import org.springframework.web.bind.MethodArgumentNotValidException;
 
 import javax.validation.ConstraintViolationException;
 import java.util.ArrayList;
@@ -40,6 +41,8 @@ public class ExceptionReasonLookup {
         REASON_LIST.add(new ErrorReason("IllegalArgumentException", "非法参数调用", HttpStatus.HTTP_INTERNAL_ERROR));
         REASON_LIST.add(new ErrorReason("ValidationException", "参数校验出错", HttpStatus.HTTP_BAD_REQUEST));
         REASON_LIST.add(new ErrorReason("ConstraintViolationException", "参数校验出错", HttpStatus.HTTP_BAD_REQUEST));
+        REASON_LIST.add(new ErrorReason("MethodArgumentNotValidException", "参数校验出错", HttpStatus.HTTP_BAD_REQUEST));
+
         REASON_LIST.add(new ErrorReason("QueryException", "查询调用出错", HttpStatus.HTTP_INTERNAL_ERROR));
         for (ErrorReason reason : REASON_LIST) {
             REASON_MAP.put(reason.getClassName(), reason);
@@ -52,39 +55,39 @@ public class ExceptionReasonLookup {
             if (e instanceof BizException) {
                 return JsonResult.ERROR(e.getMessage()).code(HttpStatus.HTTP_INTERNAL_ERROR);
             }
-            if (e instanceof BindException) {
-                BindException t = (BindException) e;
-                List<String> messages = new ArrayList<>();
-                t.getAllErrors().forEach(objectError -> {
-                    Class declaringClass = objectError.getClass().getDeclaringClass();
-                    if (declaringClass == SpringValidatorAdapter.class) {
-                        messages.add(objectError.getDefaultMessage());
-                    } else if (declaringClass == null) {
-                        FieldError fieldError = (FieldError) objectError;
-                        messages.add("参数绑定出错-" + fieldError.getObjectName() + "." + fieldError.getField() + ":" + fieldError.getRejectedValue());
-                    } else {
-                        FieldError fieldError = (FieldError) objectError;
-                        messages.add("参数绑定出错-" + fieldError.getObjectName() + "." + fieldError.getField() + ":" + fieldError.getRejectedValue());
-                    }
-                });
-                String message = CollUtil.join(messages, ",");
-                return JsonResult.ERROR(message).code(HttpStatus.HTTP_BAD_REQUEST);
-            }
-
-            if (e instanceof ConstraintViolationException) {
-                List<String> messages = new ArrayList<>();
-                ConstraintViolationException t = (ConstraintViolationException) e;
-                t.getConstraintViolations().forEach(constraintViolation -> {
-                    PathImpl pathImpl = (PathImpl) constraintViolation.getPropertyPath();
-                    // 读取参数字段，constraintViolation.getMessage() 读取验证注解中的message值
-                    String paramName = pathImpl.getLeafNode().getName();
-                    String message = "参数{".concat(paramName).concat("}").concat(constraintViolation.getMessage());
-                    messages.add(message);
-                });
-                String message = CollUtil.join(messages, ",");
-                return JsonResult.ERROR(message).code(HttpStatus.HTTP_BAD_REQUEST);
-            }
-
+//            if (e instanceof BindException) {
+//                BindException t = (BindException) e;
+//                List<String> messages = new ArrayList<>();
+//                t.getAllErrors().forEach(objectError -> {
+//                    Class declaringClass = objectError.getClass().getDeclaringClass();
+//                    if (declaringClass == SpringValidatorAdapter.class) {
+//                        messages.add(objectError.getDefaultMessage());
+//                    } else if (declaringClass == null) {
+//                        FieldError fieldError = (FieldError) objectError;
+//                        messages.add("参数绑定出错-" + fieldError.getObjectName() + "." + fieldError.getField() + ":" + fieldError.getRejectedValue());
+//                    } else {
+//                        FieldError fieldError = (FieldError) objectError;
+//                        messages.add("参数绑定出错-" + fieldError.getObjectName() + "." + fieldError.getField() + ":" + fieldError.getRejectedValue());
+//                    }
+//                });
+//                String message = CollUtil.join(messages, ",");
+//                return JsonResult.ERROR(message).code(HttpStatus.HTTP_BAD_REQUEST);
+//            }
+//
+//            if (e instanceof ConstraintViolationException) {
+//                List<String> messages = new ArrayList<>();
+//                ConstraintViolationException t = (ConstraintViolationException) e;
+//                t.getConstraintViolations().forEach(constraintViolation -> {
+//                    PathImpl pathImpl = (PathImpl) constraintViolation.getPropertyPath();
+//                    // 读取参数字段，constraintViolation.getMessage() 读取验证注解中的message值
+////                    String paramName = pathImpl.getLeafNode().getName();
+////                    String message = "参数{".concat(paramName).concat("}").concat(constraintViolation.getMessage());
+//                    String message = constraintViolation.getMessage();
+//                    messages.add(message);
+//                });
+//                String message = CollUtil.join(messages, ",");
+//                return JsonResult.ERROR(message).code(HttpStatus.HTTP_BAD_REQUEST);
+//            }
 
             String exceptionName = e.getClass().getSimpleName();
             if (REASON_MAP.containsKey(exceptionName)) {

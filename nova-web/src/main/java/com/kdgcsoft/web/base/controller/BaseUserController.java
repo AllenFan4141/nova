@@ -1,5 +1,6 @@
 package com.kdgcsoft.web.base.controller;
 
+import cn.hutool.core.lang.Opt;
 import com.kdgcsoft.web.base.entity.BaseUser;
 import com.kdgcsoft.web.base.service.BaseUserService;
 import com.kdgcsoft.web.common.model.JsonResult;
@@ -11,6 +12,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import javax.validation.constraints.NotNull;
+import java.util.function.Consumer;
+
 
 /**
  * @author fyin
@@ -24,8 +27,10 @@ public class BaseUserController extends BaseController {
     @Autowired
     BaseUserService baseService;
 
-    @PostMapping("/save")
+    @PostMapping(Api.SAVE)
     public JsonResult<BaseUser> save(@Validated BaseUser entity) {
+
+
         //检查重复性
         if (baseService.hasRepeat(entity)) {
             return JsonResult.ERROR("用户登录名重复");
@@ -36,13 +41,13 @@ public class BaseUserController extends BaseController {
     }
 
 
-    @GetMapping("/getById")
+    @GetMapping(Api.GET_BY_ID)
     public JsonResult<BaseUser> getById(@NotNull Long id) {
         return JsonResult.OK().data(baseService.getById(id));
     }
 
 
-    @GetMapping("/deleteById")
+    @GetMapping(Api.DEL_BY_ID)
     public JsonResult deleteById(@NotNull Long id) {
         return JsonResult.OK().data(baseService.removeById(id));
     }

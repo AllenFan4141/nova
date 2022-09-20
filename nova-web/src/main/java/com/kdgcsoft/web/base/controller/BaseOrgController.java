@@ -24,7 +24,7 @@ public class BaseOrgController extends BaseController {
     @Autowired
     BaseOrgService baseService;
 
-    @PostMapping("/save")
+    @PostMapping(Api.SAVE)
     public JsonResult<BaseOrg> save(@Validated BaseOrg entity) {
         //检查重复性
         if (baseService.hasRepeat(entity)) {
@@ -36,17 +36,17 @@ public class BaseOrgController extends BaseController {
     }
 
 
-    @GetMapping("/getById")
+    @GetMapping(Api.GET_BY_ID)
     public JsonResult<BaseOrg> getById(@NotNull Long id) {
         return JsonResult.OK().data(baseService.getById(id));
     }
 
-    @GetMapping("/tree")
+    @GetMapping(Api.TREE)
     public JsonResult tree() {
         return JsonResult.OK().data(baseService.tree());
     }
 
-    @GetMapping("/deleteById")
+    @GetMapping(Api.DEL_BY_ID)
     public JsonResult deleteById(@NotNull Long id) {
         return JsonResult.OK().data(baseService.removeById(id));
     }

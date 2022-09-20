@@ -1,9 +1,11 @@
 package com.kdgcsoft.web.config.knife4j;
 
 import com.kdgcsoft.web.config.NovaProperties;
+import com.kdgcsoft.web.config.security.SecurityConfiguration;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.AutoConfiguration;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import springfox.documentation.builders.ApiInfoBuilder;
@@ -17,7 +19,7 @@ import springfox.documentation.swagger2.annotations.EnableSwagger2WebMvc;
  * @author fyin
  * @date 2021-04-27 11:13
  */
-@Configuration
+@Configuration()
 @EnableSwagger2WebMvc
 public class Knife4jConfiguration {
 
@@ -37,9 +39,7 @@ public class Knife4jConfiguration {
                 .groupName(novaProperties.getName() + "-api")
                 .select()
                 //这里指定Controller扫描包路径
-                .apis(RequestHandlerSelectors.basePackage("com.kdgcsoft.**")
-                        .and(RequestHandlerSelectors.withClassAnnotation(Api.class))
-                        .and(RequestHandlerSelectors.withMethodAnnotation(ApiOperation.class)))
+                .apis(RequestHandlerSelectors.basePackage("com.kdgcsoft.**"))
                 .paths(PathSelectors.any())
                 .build();
         return docket;

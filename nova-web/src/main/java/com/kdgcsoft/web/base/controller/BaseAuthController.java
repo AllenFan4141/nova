@@ -1,7 +1,6 @@
 package com.kdgcsoft.web.base.controller;
 
-import com.kdgcsoft.web.base.anno.OptLog;
-import com.kdgcsoft.web.base.enums.OptType;
+import com.kdgcsoft.web.base.model.LoginBody;
 import com.kdgcsoft.web.base.service.BaseAuthService;
 import com.kdgcsoft.web.common.consts.I18N;
 import com.kdgcsoft.web.common.model.JsonResult;
@@ -11,9 +10,11 @@ import io.swagger.annotations.ApiParam;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import javax.validation.Valid;
 import javax.validation.constraints.NotBlank;
 
 /**
@@ -30,11 +31,9 @@ public class BaseAuthController extends BaseController {
     BaseAuthService baseAuthService;
 
     @ApiOperation("登陆")
-    @PostMapping("login")
-    public JsonResult login(@ApiParam(value = "用户名", required = true) @NotBlank(message = "用户名不能为空") String username,
-                            @ApiParam(value = "密码", required = true) @NotBlank(message = "密码不能为空") String password,
-                            boolean rememberMe) {
-        return baseAuthService.login(username, password, rememberMe);
+    @PostMapping(Api.LOGIN)
+    public JsonResult login(@RequestBody @Valid LoginBody loginBody) {
+        return baseAuthService.login(loginBody.getUsername(), loginBody.getPassword(), loginBody.isRememberMe());
     }
 
     /**
@@ -43,7 +42,7 @@ public class BaseAuthController extends BaseController {
      * @return
      */
     @ApiOperation("注销")
-    @PostMapping("logout")
+    @PostMapping(Api.LOGOUT)
     public JsonResult logout() {
         return JsonResult.OK(I18N.AUTH_LOGOUT);
     }
