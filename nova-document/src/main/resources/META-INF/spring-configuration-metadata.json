@@ -1,0 +1,67 @@
+{
+  "properties": [
+    {
+      "name": "nova.document.baseDir",
+      "type": "java.lang.String",
+      "description": "文档仓库的根目录",
+      "defaultValue": "repository",
+      "sourceType": "com.kdgcsoft.document.config.DocumentProperties"
+    },
+    {
+      "name": "nova.document.name",
+      "type": "java.lang.String",
+      "description": "文档仓库的名称",
+      "defaultValue": "default",
+      "sourceType": "com.kdgcsoft.document.config.DocumentProperties"
+    },
+    {
+      "name": "nova.document.repository.type",
+      "type": "com.kdgcsoft.document.enums.RepositoryType",
+      "description": "文档仓库的类型",
+      "defaultValue": "localJackrabbit"
+    },
+    {
+      "name": "nova.document.repository.config",
+      "type": "java.lang.String",
+      "description": "jackrabbit文档仓库初始化时使用的xml文件路径",
+      "defaultValue": "repository.xml"
+    },
+    {
+      "name": "nova.document.repository.url",
+      "type": "java.lang.String",
+      "description": "远程jackrabbit的URL,当type为remote时使用该url",
+      "defaultValue": ""
+    },
+    {
+      "name": "nova.document.repository.username",
+      "type": "java.lang.String",
+      "description": "连接仓库的用户名",
+      "defaultValue": ""
+    },
+    {
+      "name": "nova.document.repository.password",
+      "type": "java.lang.String",
+      "description": "连接仓库的密码",
+      "defaultValue": ""
+    }
+  ],
+  "hints": [
+    {
+      "name": "uframe.document.repository.type",
+      "values": [
+        {
+          "value": "dir",
+          "description": "使用磁盘目录存储"
+        },
+        {
+          "value": "local",
+          "description": "使用内置的jackrabbit仓库存储"
+        },
+        {
+          "value": "remote",
+          "description": "使用远程jackrabbit仓库存储"
+        }
+      ]
+    }
+  ]
+}

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<nodeTypes xmlns:fn="http://www.w3.org/2005/xpath-functions" xmlns:fn_old="http://www.w3.org/2004/10/xpath-functions"
+           xmlns:jcr="http://www.jcp.org/jcr/1.0" xmlns:meta="http://www.kdgcsoft.com/jcr"
+           xmlns:mix="http://www.jcp.org/jcr/mix/1.0" xmlns:nt="http://www.jcp.org/jcr/nt/1.0" xmlns:rep="internal"
+           xmlns:sv="http://www.jcp.org/jcr/sv/1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+    <nodeType hasOrderableChildNodes="false" isAbstract="false" isMixin="true" isQueryable="true" name="meta:extensible"
+              primaryItemName="">
+        <propertyDefinition autoCreated="false" isFullTextSearchable="true" isQueryOrderable="true" mandatory="false"
+                            multiple="false" name="*" onParentVersion="COPY" protected="false"
+                            requiredType="undefined"/>
+    </nodeType>
+</nodeTypes>

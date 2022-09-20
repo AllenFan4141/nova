@@ -1,0 +1,6 @@
+// 自定义的属性集，基于JCR mixin数据结构
+// 命名空间为meta
+<meta = 'http://www.kdgcsoft.com/jcr'>
+[meta:extensible] mixin
+// 支持任意属性
+- * (undefined)
