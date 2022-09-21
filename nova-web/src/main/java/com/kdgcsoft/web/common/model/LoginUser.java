@@ -24,6 +24,8 @@ public class LoginUser implements UserDetails {
     private String fullName;
     private String avatar;
 
+    private String nickName;
+
     private UserType userType = UserType.NORMAL;
     private String ipAddress;
     private String browser;
@@ -98,7 +100,6 @@ public class LoginUser implements UserDetails {
     public boolean isEnabled() {
         return this.enabled;
     }
-
 
 
     public Long getUserId() {
@@ -219,5 +220,17 @@ public class LoginUser implements UserDetails {
 
     public void setAccountNonLocked(boolean accountNonLocked) {
         this.accountNonLocked = accountNonLocked;
+    }
+
+    public boolean isRoot() {
+        return this.userType == UserType.ROOT;
+    }
+
+    public String getNickName() {
+        return nickName;
+    }
+
+    public void setNickName(String nickName) {
+        this.nickName = nickName;
     }
 }

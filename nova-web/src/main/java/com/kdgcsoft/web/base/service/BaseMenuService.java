@@ -1,5 +1,6 @@
 package com.kdgcsoft.web.base.service;
 
+import cn.hutool.core.collection.CollUtil;
 import cn.hutool.core.util.StrUtil;
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
 import com.baomidou.mybatisplus.extension.service.impl.ServiceImpl;
@@ -9,8 +10,10 @@ import com.kdgcsoft.web.base.entity.BaseMenu;
 import com.kdgcsoft.web.base.entity.BaseOrg;
 import com.kdgcsoft.web.base.enums.YesNo;
 import com.kdgcsoft.web.base.mapper.BaseMenuMapper;
+import com.kdgcsoft.web.common.model.LoginUser;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -23,8 +26,19 @@ public class BaseMenuService extends ServiceImpl<BaseMenuMapper, BaseMenu> {
         return baseMapper.selectList(new LambdaQueryWrapper<BaseMenu>().orderByAsc(BaseMenu::getOrderNo));
     }
 
+
+    public List<String> getAllMenuCodes() {
+        List<String> menuCodes = new ArrayList<>();
+        CollUtil.forEach(listAllByOrder(), (CollUtil.Consumer<BaseMenu>) (value, index) -> menuCodes.add(value.getCode()));
+        return menuCodes;
+    }
+
     public List<BaseMenu> tree() {
         return TreeUtil.buildTree(this.listAllByOrder());
+    }
+
+    public List<BaseMenu> userMenuTree(LoginUser loginUser) {
+        return tree();
     }
 
     public BaseMenu saveBaseMenu(BaseMenu entity) {

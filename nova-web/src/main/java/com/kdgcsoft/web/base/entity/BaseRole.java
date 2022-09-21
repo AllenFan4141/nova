@@ -1,6 +1,8 @@
 package com.kdgcsoft.web.base.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
+import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
 import com.kdgcsoft.web.base.enums.RoleType;
 import com.kdgcsoft.web.base.enums.YesNo;
@@ -20,6 +22,7 @@ public class BaseRole extends BaseEntity implements Serializable {
     /**
      * 角色ID
      */
+    @TableId(type = IdType.AUTO)
     private Long roleId;
 
     /**

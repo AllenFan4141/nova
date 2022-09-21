@@ -127,6 +127,7 @@ public class BaseUser extends BaseEntity implements Serializable {
         loginUser.setUserPassword(this.loginPassword);
         loginUser.setFullName(this.userName);
         loginUser.setAvatar(this.userAvatar);
+        loginUser.setNickName(this.nickName);
         loginUser.setUserType(UserType.NORMAL);
         loginUser.setEnabled(this.enabled == YesNo.Y);
         switch (this.userStatus) {

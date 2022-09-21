@@ -5,7 +5,7 @@ const userApi = {
   Logout: '/auth/logout',
   Register: '/register',
   // get my info
-  UserInfo: '/getInfo'
+  UserInfo: '/auth/getUserInfo'
 }
 
 /**

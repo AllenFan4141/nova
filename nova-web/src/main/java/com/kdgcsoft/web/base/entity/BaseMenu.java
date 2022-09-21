@@ -1,5 +1,6 @@
 package com.kdgcsoft.web.base.entity;
 
+import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
@@ -28,7 +29,7 @@ import java.util.List;
 public class BaseMenu extends BaseEntity implements Serializable, ITreeNode<BaseMenu> {
 
     @ApiModelProperty("主键")
-    @TableId
+    @TableId(type = IdType.AUTO)
     private Long id;
 
     @ApiModelProperty("上级菜单编码")

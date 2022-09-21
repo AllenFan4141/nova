@@ -38,8 +38,8 @@ const user = {
     Login ({ commit }, userInfo) {
       return new Promise((resolve, reject) => {
         login(userInfo).then(res => {
-          storage.set(ACCESS_TOKEN, res.token, 7 * 24 * 60 * 60 * 1000)
-          commit('SET_TOKEN', res.token)
+          storage.set(ACCESS_TOKEN, res.data, 7 * 24 * 60 * 60 * 1000)
+          commit('SET_TOKEN', res.data)
           resolve()
         })
         .catch(error => {
@@ -52,15 +52,14 @@ const user = {
     GetInfo ({ commit, state }) {
       return new Promise((resolve, reject) => {
         getInfo(state.token).then(res => {
-          const user = res.user
-          const avatar = user.avatar === '' ? require('@/assets/images/profile.jpg') : process.env.VUE_APP_BASE_API + user.avatar
-          if (res.roles && res.roles.length > 0) { // 验证返回的roles是否是一个非空数组
-            commit('SET_ROLES', res.roles)
-            commit('SET_PERMISSIONS', res.permissions)
-          } else {
-            commit('SET_ROLES', ['ROLE_DEFAULT'])
+          const userInfo = res.data
+          const avatar = userInfo.avatar === '' ? require('@/assets/images/profile.jpg') : process.env.VUE_APP_BASE_API + userInfo.avatar
+          if (userInfo.permissions && userInfo.permissions.length > 0) { // 验证返回的roles是否是一个非空数组
+           // commit('SET_ROLES', userInfo.roles)
+            commit('SET_PERMISSIONS', userInfo.permissions)
           }
-          commit('SET_NAME', user.nickName)
+          commit('SET_ROLES', ['ROLE_DEFAULT'])
+          commit('SET_NAME', userInfo.nickName)
           commit('SET_AVATAR', avatar)
           resolve(res)
         }).catch(error => {

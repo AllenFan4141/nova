@@ -139,5 +139,113 @@
       "defaultValue": "-1",
       "description": "设置密码的有效时长,单位(月),超过该时长用户没有修改过密码,则会强制用户修改密码,设置为-1或0 则不启动该策略,注意,该策略需要配合[强制修改密码]选项一起使用"
     }
+  ],
+  "menus": [
+    {
+      "code": "BASE_SYSTEM",
+      "name": "系统管理",
+      "url": "#",
+      "children": [
+        {
+          "code": "BASE_ORG",
+          "name": "组织机构管理",
+          "url": "baseOrg/index"
+        },
+        {
+          "code": "BASE_DEPT",
+          "name": "部门管理",
+          "url": "baseDept/index"
+        },
+        {
+          "code": "BASE_USER",
+          "name": "用户管理",
+          "url": "baseUser/index"
+        },
+        {
+          "code": "BASE_ROLE",
+          "name": "角色权限管理",
+          "url": "baseRole/index"
+        }
+      ]
+    },
+    {
+      "code": "BASE_SETTING",
+      "name": "基础信息",
+      "url": "#",
+      "children": [
+        {
+          "code": "MODULE_INFO",
+          "name": "框架基本信息",
+          "url": "base/module/index"
+        },
+        {
+          "code": "UI_VIEW",
+          "name": "框架UI组件",
+          "url": "base/example/index"
+        },
+        {
+          "code": "BASE_DIC",
+          "name": "字典管理",
+          "url": "base/dic/index"
+        },
+        {
+          "code": "BASE_PARAM",
+          "name": "系统参数管理",
+          "url": "base/param/index"
+        },
+        {
+          "code": "BASE_MENU",
+          "name": "菜单管理",
+          "url": "base/menu/index"
+        },
+        {
+          "code": "BASE_JOB",
+          "name": "定时任务管理",
+          "url": "base/job/index"
+        }
+      ]
+    },
+    {
+      "code": "SYS-MONITOR",
+      "name": "系统监控",
+      "url": "#",
+      "children": [
+        {
+          "code": "DRUID-MONITOR",
+          "name": "数据源监控",
+          "url": "/druid"
+        },
+        {
+          "code": "ONLINE-LOG",
+          "name": "日志监控",
+          "url": "base/onlinelog/index"
+        },
+        {
+          "code": "OPT-LOG",
+          "name": "操作日志",
+          "url": "base/optlog/index"
+        },
+        {
+          "code": "LOGIN-LOG",
+          "name": "登陆日志",
+          "url": "base/loginlog/index"
+        },
+        {
+          "code": "CACHE-MONITOR",
+          "name": "缓存监控",
+          "url": "base/cache/index"
+        },
+        {
+          "code": "SERVER-MONITOR",
+          "name": "服务器监控",
+          "url": "base/server/index"
+        },
+        {
+          "code": "ONLINE-USER",
+          "name": "在线用户",
+          "url": "base/onlineuser/index"
+        }
+      ]
+    }
   ]
 }
